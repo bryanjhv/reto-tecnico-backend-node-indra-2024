@@ -1,0 +1,106 @@
+service: reto-tecnico-backend-node-indra-2024
+
+stages:
+  default:
+    params:
+      usuariosTableName: 'usuarios-table-${sls:stage}'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [UsuariosTable, Arn]
+  environment:
+    SWAPI_URL: ${env:SWAPI_URL}
+    USUARIOS_TABLE: ${param:usuariosTableName}
+
+functions:
+  # Lista planetas de SWAPI.
+  listPlanetas:
+    handler: app/handlers/planetas.list
+    events:
+      - http:
+          path: api/planetas
+          method: get
+          documentation: ${file(serverless.doc.yml):endpoints.listPlanetas}
+  # Obtiene un planeta de SWAPI.
+  findPlaneta:
+    handler: app/handlers/planetas.find
+    events:
+      - http:
+          path: api/planetas/{id}
+          method: get
+          documentation: ${file(serverless.doc.yml):endpoints.findPlaneta}
+  # Lista vehículos de SWAPI.
+  listVehiculos:
+    handler: app/handlers/vehiculos.list
+    events:
+      - http:
+          path: api/vehiculos
+          method: get
+          documentation: ${file(serverless.doc.yml):endpoints.listVehiculos}
+  # Obtiene un vehículo de SWAPI.
+  findVehiculo:
+    handler: app/handlers/vehiculos.find
+    events:
+      - http:
+          path: api/vehiculos/{id}
+          method: get
+          documentation: ${file(serverless.doc.yml):endpoints.findVehiculo}
+  # Lista usuarios.
+  listUsuarios:
+    handler: app/handlers/usuarios.list
+    events:
+      - http:
+          path: api/usuarios
+          method: get
+          documentation: ${file(serverless.doc.yml):endpoints.listUsuarios}
+  # Obtiene un usuario.
+  findUsuario:
+    handler: app/handlers/usuarios.find
+    events:
+      - http:
+          path: api/usuarios/{id}
+          method: get
+          documentation: ${file(serverless.doc.yml):endpoints.findUsuario}
+  # Crea un usuario.
+  createUsuario:
+    handler: app/handlers/usuarios.create
+    events:
+      - http:
+          path: api/usuarios
+          method: post
+          documentation: ${file(serverless.doc.yml):endpoints.createUsuario}
+
+resources:
+  Resources:
+    UsuariosTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${param:usuariosTableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+plugins:
+  # no plugin required for typescript, serverless v4 supports it already
+  - serverless-offline # for local development
+  - serverless-openapi-documenter # for swagger documentation
+
+custom:
+  documentation: ${file(serverless.doc.yml):documentation}

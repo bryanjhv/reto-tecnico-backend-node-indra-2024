@@ -1,0 +1,85 @@
+documentation:
+  version: '1'
+  title: Reto Técnico Backend Node Indra 2024
+  description: API implementada para el reto técnico de backend en Indra 2024.
+
+endpoints:
+  listPlanetas:
+    summary: Listar planetas
+    description: Lista los planetas de SWAPI.
+    queryParams:
+      - name: page
+        description: Número de página.
+        schema:
+          type: string
+          pattern: '^[0-9]+$'
+    methodResponses:
+      - statusCode: 200
+      - statusCode: 404
+  findPlaneta:
+    summary: Obtener planeta
+    description: Obtiene un planeta de SWAPI.
+    pathParams:
+      - name: id
+        description: ID del planeta.
+        schema:
+          type: string
+          pattern: '^[0-9]+$'
+    methodResponses:
+      - statusCode: 200
+      - statusCode: 404
+  listVehiculos:
+    summary: Listar vehículos
+    description: Lista los vehículos de SWAPI.
+    queryParams:
+      - name: page
+        description: Número de página.
+        schema:
+          type: string
+          pattern: '^[0-9]+$'
+    methodResponses:
+      - statusCode: 200
+      - statusCode: 404
+  findVehiculo:
+    summary: Obtener vehículo
+    description: Obtiene un vehículo de SWAPI.
+    pathParams:
+      - name: id
+        description: ID del vehículo.
+        schema:
+          type: string
+          pattern: '^[0-9]+$'
+    methodResponses:
+      - statusCode: 200
+      - statusCode: 404
+
+  listUsuarios:
+    summary: Listar usuarios
+    description: Lista los usuarios de la API.
+    queryParams:
+      - name: page
+        description: Número de página.
+        schema:
+          type: string
+          pattern: '^[0-9]+$'
+    methodResponses:
+      - statusCode: 200
+      - statusCode: 404
+  findUsuario:
+    summary: Obtener usuario
+    description: Obtiene un usuario de la API.
+    pathParams:
+      - name: id
+        description: ID del usuario.
+        schema:
+          type: string
+          pattern: '^[-a-z0-9]+$'
+    methodResponses:
+      - statusCode: 200
+      - statusCode: 404
+  createUsuario:
+    summary: Crear usuario
+    description: Crea un usuario en la API.
+    methodResponses:
+      - statusCode: 201
+      - statusCode: 400

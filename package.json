@@ -1,0 +1,43 @@
+{
+  "name": "reto-tecnico-backend-node-indra-2024",
+  "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@9.14.2",
+  "description": "Implementación de reto técnico para postular al cargo de desarrollador backend en Indra.",
+  "author": "Bryan Horna <bryanjhv@gmail.com> (https://bryanjhv.github.io)",
+  "license": "MIT",
+  "keywords": [
+    "aws",
+    "indra",
+    "nodejs",
+    "reto",
+    "serverless",
+    "typescript"
+  ],
+  "scripts": {
+    "deploy": "serverless deploy",
+    "dev": "serverless offline",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.696.0",
+    "@aws-sdk/lib-dynamodb": "3.698.0",
+    "bcryptjs": "2.4.3",
+    "uuid": "11.0.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "3.9.2",
+    "@tsconfig/node20": "20.1.4",
+    "@tsconfig/strictest": "2.0.5",
+    "@types/aws-lambda": "8.10.145",
+    "@types/bcryptjs": "2.4.6",
+    "@types/node": "20.17.6",
+    "eslint": "9.15.0",
+    "eslint-plugin-format": "0.1.2",
+    "serverless": "4.4.11",
+    "serverless-offline": "14.3.4",
+    "serverless-openapi-documenter": "0.0.109",
+    "typescript": "5.6.3"
+  }
+}
