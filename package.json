@@ -18,7 +18,8 @@
     "deploy": "serverless deploy",
     "dev": "serverless offline",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "openapi:generate": "serverless openapi generate -o app/openapi.yml -f yaml -a 3.0.3"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "3.696.0",

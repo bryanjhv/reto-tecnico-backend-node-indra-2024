@@ -56,3 +56,15 @@ GET /api/usuarios  # Para listar los usuarios
 GET /api/usuarios/34a177db-9516-40fb-9a04-d517e1cfe314  # Para obtener el usuario con dicho ID
 POST /api/usuarios  # Para crear un usuario
 ```
+
+## Generación de OpenAPI
+
+Para generar documentación para OpenAPI/Swagger, puedes correr:
+
+```bash
+pnpm run openapi:generate
+# o si no usas pnpm:
+npm run openapi:generate
+```
+
+Y generará un archivo `app/openapi.yml` el cual se puede importar a Swagger UI.
